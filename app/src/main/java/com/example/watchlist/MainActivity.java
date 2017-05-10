@@ -29,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Get user input
         String movieSearch = movie.getText().toString();
+
         // Search movie in database API
         // Perform async tasks. While retrieving data the app shouldn't freeze
         // Give it the present context
         MovieAsyncTask asyncTask = new MovieAsyncTask(this);
+
         // Using async task
         asyncTask.execute(movieSearch);
         movie.getText().clear();

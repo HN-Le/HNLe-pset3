@@ -17,10 +17,11 @@ public class HttpRequestHelper {
         String chosenTag = params[0];
 
         URL site = null;
-        String url = "";
+        String url;
         try {
             url = "http://www.omdbapi.com/?s=" + chosenTag;
             site = new URL(url);
+
         }
 
         catch (MalformedURLException e) {
@@ -52,7 +53,6 @@ public class HttpRequestHelper {
             catch (IOException e) {
                 e.printStackTrace();
             }
-
 
         return result;
 

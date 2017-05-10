@@ -1,7 +1,11 @@
 package com.example.watchlist;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,6 +16,7 @@ public class DataActivity extends AppCompatActivity {
     TextView movie_results;
     ListView lvitems;
     ArrayList<String> movieArray;
+    String movie_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +39,39 @@ public class DataActivity extends AppCompatActivity {
         lvitems = (ListView) findViewById(R.id.lvitems);
         assert lvitems != null;
         lvitems.setAdapter(arrayAdapter);
+
+        lvitems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.i("Movie Tapped: ", movieArray.get(position));
+
+                movie_title = movieArray.get(position);
+
+                MovieAsyncTask2 asyncTask2 = new MovieAsyncTask2(this);
+                asyncTask2.execute(movie_title);
+
+            }
+
+        });
+
+
+
     }
+
+
+    public void movieStartIntent2(ArrayList<String> movieData2) {
+
+        Intent dataIntent = new Intent(this, View_Movie.class);
+        dataIntent.putExtra("data", movieData2);
+
+        Intent intent = new Intent(DataActivity.this, View_Movie.class);
+
+        intent.putExtra("movie_title", movie_title);
+
+        this.startActivity(dataIntent);
+
+    }
+
 }
+

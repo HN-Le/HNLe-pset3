@@ -9,10 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 
 /**
@@ -49,38 +47,34 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> data = new ArrayList<>();
 
         try {
-
-            data = "";
 
             JSONObject movieStreamObject = new JSONObject(result);
 
             movie_data = movieStreamObject.optJSONArray("Search");
 
-            String title = "";
-
+            String title;
 
             for(int i = 0; i < movie_data.length(); i++){
 
                 JSONObject object = movie_data.getJSONObject(i);
                 title = object.getString("Title");
-                list.add(title);
+
+                data.add(title);
 
                 Log.i("title", title);
-
             }
 
             Log.i("result", result);
 
-
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
 
-        this.mainAct.movieStartIntent(list);
+        catch (JSONException e) {
+            e.printStackTrace();
+            }
+
+        this.mainAct.movieStartIntent(data);
     }
 }
