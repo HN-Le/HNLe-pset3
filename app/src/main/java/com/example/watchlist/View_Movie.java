@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class View_Movie extends AppCompatActivity {
 
     @Override
@@ -14,14 +16,25 @@ public class View_Movie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view__movie);
 
-        Intent intent = getIntent();
-        String final_movie = intent.getStringExtra("movie_title");
-
         TextView movie_data = (TextView) findViewById(R.id.movie_data);
 
-        Log.i("final", final_movie);
+        Bundle extras = getIntent().getExtras();
+        ArrayList<String> data = new ArrayList<>();
 
-        movie_data.setText(final_movie);
+        if (extras != null)
+            data = extras.getStringArrayList("data");
+
+        String result = "";
+
+        // Go over every list in array list
+        for (String str : data){
+            result += str + '\n';
+        }
+
+        movie_data.setText(result);
+
+
+
     }
 
 

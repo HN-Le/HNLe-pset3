@@ -1,5 +1,6 @@
 package com.example.watchlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class DataActivity extends AppCompatActivity {
@@ -17,6 +20,7 @@ public class DataActivity extends AppCompatActivity {
     ListView lvitems;
     ArrayList<String> movieArray;
     String movie_title;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +52,14 @@ public class DataActivity extends AppCompatActivity {
 
                 movie_title = movieArray.get(position);
 
-                MovieAsyncTask2 asyncTask2 = new MovieAsyncTask2(this);
-                asyncTask2.execute(movie_title);
+                MovieAsyncTask2 asyncTask2 = new MovieAsyncTask2((DataActivity)context);
+
+                try {
+                    asyncTask2.execute((URLEncoder.encode(movie_title, "UTF-8")));
+                }
+                catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
 
             }
 
