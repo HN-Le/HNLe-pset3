@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class View_Movie extends AppCompatActivity {
@@ -17,6 +19,7 @@ public class View_Movie extends AppCompatActivity {
         setContentView(R.layout.activity_view__movie);
 
         TextView movie_data = (TextView) findViewById(R.id.movie_data);
+        TextView movie_data_title = (TextView) findViewById(R.id.movie_data_title);
 
         Bundle extras = getIntent().getExtras();
         ArrayList<String> data = new ArrayList<>();
@@ -24,14 +27,13 @@ public class View_Movie extends AppCompatActivity {
         if (extras != null)
             data = extras.getStringArrayList("data");
 
-        String result = "";
 
-        // Go over every list in array list
-        for (String str : data){
-            result += str + '\n';
-        }
+        String result = data.get(0);
+        String title = data.get(1);
+
 
         movie_data.setText(result);
+        movie_data_title.setText(title);
 
 
 

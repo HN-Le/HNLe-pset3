@@ -8,13 +8,28 @@
 
     <TextView
         android:id="@+id/movie_data"
-        android:layout_width="284dp"
-        android:layout_height="367dp"
+        android:layout_width="288dp"
+        android:layout_height="83dp"
         android:ems="20"
         android:inputType="textMultiLine"
-        android:text="TEST"
+        android:text="Plot"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="109dp"
-        app:layout_constraintHorizontal_bias="0.502" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.474" />
+
+    <TextView
+        android:id="@+id/movie_data_title"
+        android:layout_width="288dp"
+        android:layout_height="83dp"
+        android:ems="20"
+        android:inputType="textMultiLine"
+        android:text="TITLE"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
+
 </android.support.constraint.ConstraintLayout>

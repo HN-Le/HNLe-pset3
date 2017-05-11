@@ -36,34 +36,28 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
     // Searching in API
     @Override
     protected String doInBackground(String... params) {
-        return HttpRequestHelper.downloadFromServer(params);
+        return HttpRequestHelper2.downloadFromServer(params);
     }
 
     // After retrieving data
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        ArrayList<String> data = new ArrayList<>();
+        ArrayList<String> data2 = new ArrayList<>();
 
         try {
 
-            JSONObject movieStreamObject = new JSONObject(result);
+            JSONObject movie_data2 = new JSONObject(result);
 
-            movie_data2 = movieStreamObject.optJSONArray("Search");
+            String plot;
+            String title;
 
-            String year;
+            plot = movie_data2.getString("Plot");
 
-            for(int i = 0; i < movie_data2.length(); i++){
+            title = movie_data2.getString("Title");
 
-                JSONObject object = movie_data2.getJSONObject(i);
-                year = object.getString("Year");
-
-                data.add(year);
-
-                Log.i("year", year);
-            }
-
-            Log.i("result", result);
+            data2.add(plot);
+            data2.add(title);
 
         }
 
@@ -71,6 +65,6 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
 
-        this.mainAct2.movieStartIntent2(data);
+        this.mainAct2.movieStartIntent2(data2);
     }
 }
