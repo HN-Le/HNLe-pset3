@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
     Context context;
     MainActivity mainAct;
-    String data;
     JSONArray movie_data;
 
     public MovieAsyncTask(MainActivity main){

@@ -54,6 +54,7 @@ public class DataActivity extends AppCompatActivity {
 
                 MovieAsyncTask2 asyncTask2 = new MovieAsyncTask2((DataActivity)context);
 
+
                 try {
                     asyncTask2.execute((URLEncoder.encode(movie_title, "UTF-8")));
                 }
@@ -70,14 +71,18 @@ public class DataActivity extends AppCompatActivity {
     }
 
 
-    public void movieStartIntent2(ArrayList<String> movieData2) {
+    public void movieStartIntent2(ArrayList<DataObject> movieData2) {
 
         Intent dataIntent = new Intent(this, View_Movie.class);
+
+//        Bundle extras2 = new Bundle();
+//        extras2.putString("movie_title", movie_title);
+
         dataIntent.putExtra("data", movieData2);
 
-        Intent intent = new Intent(DataActivity.this, View_Movie.class);
-
-        intent.putExtra("movie_title", movie_title);
+//        Intent intent = new Intent(DataActivity.this, View_Movie.class);
+//
+//        intent.putExtra("movie_title", movie_title);
 
         this.startActivity(dataIntent);
 

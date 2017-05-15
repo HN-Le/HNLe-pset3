@@ -13,6 +13,11 @@ import java.util.ArrayList;
 
 public class View_Movie extends AppCompatActivity {
 
+//MovieAsyncTask2.DataObject moviedata;
+
+    String plot, title, year, directors, actors;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,21 +25,35 @@ public class View_Movie extends AppCompatActivity {
 
         TextView movie_data = (TextView) findViewById(R.id.movie_data);
         TextView movie_data_title = (TextView) findViewById(R.id.movie_data_title);
+        TextView movie_data_year = (TextView) findViewById(R.id.movie_data_year);
+        TextView movie_data_directors = (TextView) findViewById(R.id.movie_data_directors);
+        TextView movie_data_actors = (TextView) findViewById(R.id.movie_data_actors);
+
+        ArrayList<DataObject> movieArray;
 
         Bundle extras = getIntent().getExtras();
-        ArrayList<String> data = new ArrayList<>();
 
-        if (extras != null)
-            data = extras.getStringArrayList("data");
+        movieArray = (ArrayList<DataObject>) extras.getSerializable("data");
+
+        if (movieArray != null){
+
+            for (DataObject movieobject: movieArray) {
+                plot = movieobject.getPlot();
+                title = movieobject.getTitle();
+                year = movieobject.getYear();
+                directors = movieobject.getDirectors();
+                actors = movieobject.getActors();
 
 
-        String result = data.get(0);
-        String title = data.get(1);
+            }
 
+        }
 
-        movie_data.setText(result);
+        movie_data.setText("PLOT:\n" + plot);
         movie_data_title.setText(title);
-
+        movie_data_year.setText("Year: " + year );
+        movie_data_directors.setText("Directors: " + directors );
+        movie_data_actors.setText("Actors: " + actors);
 
 
     }

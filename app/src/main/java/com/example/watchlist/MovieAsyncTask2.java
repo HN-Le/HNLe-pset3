@@ -12,14 +12,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Tiny on 19-4-2017.
- */
-
 public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
     Context context;
     DataActivity mainAct2;
-    JSONArray movie_data2;
+    ArrayList<DataObject> movies;
 
     public MovieAsyncTask2(DataActivity view){
         this.mainAct2 = view;
@@ -36,6 +32,7 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
     // Searching in API
     @Override
     protected String doInBackground(String... params) {
+        Log.i("PARAAAMSSS", params[0]);
         return HttpRequestHelper2.downloadFromServer(params);
     }
 
@@ -43,28 +40,48 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        ArrayList<String> data2 = new ArrayList<>();
+        ArrayList<DataObject> movies = new ArrayList<>();
+
+        Log.d("plot", "PLOOOOOOT");
 
         try {
 
             JSONObject movie_data2 = new JSONObject(result);
-
-            String plot;
-            String title;
+            String plot, title, year, directors, actors;
 
             plot = movie_data2.getString("Plot");
-
             title = movie_data2.getString("Title");
+            year = movie_data2.getString("Year");
+            directors = movie_data2.getString("Director");
+            actors = movie_data2.getString("Actors");
 
-            data2.add(plot);
-            data2.add(title);
+            DataObject moviedata = new DataObject();
+
+            moviedata.setPlot(plot);
+            moviedata.setTitle(title);
+            moviedata.setYear(year);
+            moviedata.setDirectors(directors);
+            moviedata.setActors(actors);
+
+            movies.add(moviedata);
+
 
         }
+
 
         catch (JSONException e) {
+
+            Log.d("plot", "ERRROR ");
             e.printStackTrace();
+
         }
 
-        this.mainAct2.movieStartIntent2(data2);
+
+        this.mainAct2.movieStartIntent2(movies);
     }
-}
+
+
+
+
+    }
+

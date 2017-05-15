@@ -47,7 +47,7 @@ public class HttpRequestHelper {
                         result += line;
                     }
                 }
-                Log.d("result", result);
+                Log.d("HHTP", result);
             }
 
             catch (IOException e) {
