@@ -1,6 +1,8 @@
 package com.example.watchlist;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -10,6 +12,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
@@ -33,6 +38,7 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... params) {
         Log.i("PARAAAMSSS", params[0]);
+
         return HttpRequestHelper2.downloadFromServer(params);
     }
 
@@ -47,13 +53,14 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
         try {
 
             JSONObject movie_data2 = new JSONObject(result);
-            String plot, title, year, directors, actors;
+            String plot, title, year, directors, actors, poster;
 
             plot = movie_data2.getString("Plot");
             title = movie_data2.getString("Title");
             year = movie_data2.getString("Year");
             directors = movie_data2.getString("Director");
             actors = movie_data2.getString("Actors");
+            poster = movie_data2.getString("Poster");
 
             DataObject moviedata = new DataObject();
 
@@ -62,6 +69,7 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
             moviedata.setYear(year);
             moviedata.setDirectors(directors);
             moviedata.setActors(actors);
+            moviedata.setPoster(poster);
 
             movies.add(moviedata);
 
@@ -81,7 +89,8 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
     }
 
 
-
-
     }
+
+
+
 

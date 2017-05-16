@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DataActivity" />
-        <activity android:name=".View_Movie"></activity>
+        <activity android:name=".View_Movie" />
+        <activity android:name=".favorites"></activity>
     </application>
 
 </manifest>

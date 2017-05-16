@@ -12,6 +12,8 @@ public class DataObject implements Serializable{
         public String year;
         public String directors;
         public String actors;
+        public String poster;
+
 
         public void setPlot(String newplot){
 
@@ -39,6 +41,10 @@ public class DataObject implements Serializable{
             actors = newactors;
         }
 
+        public void setPoster(String newPoster){
+            poster = newPoster;
+        }
+
         public String getPlot(){
 
             return plot;
@@ -62,6 +68,11 @@ public class DataObject implements Serializable{
         public String getActors(){
 
             return actors;
+        }
+
+        public String getPoster(){
+
+            return poster;
         }
 }
 

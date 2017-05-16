@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import static com.example.watchlist.R.layout.activity_favorites;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText movie;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         MovieAsyncTask asyncTask = new MovieAsyncTask(this);
 
         // Using async task
+
         asyncTask.execute(movieSearch);
         movie.getText().clear();
 
@@ -49,4 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void favorites(View view) {
+        Intent intent = new Intent(this, favorites.class);
+        this.startActivity(intent);
+    }
 }
