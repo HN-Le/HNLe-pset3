@@ -14,7 +14,7 @@
         android:text=""
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="177dp" />
-
+    
     <ListView
         android:id="@+id/lvitems"
         android:layout_width="fill_parent"

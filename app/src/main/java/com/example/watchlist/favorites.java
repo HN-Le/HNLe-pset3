@@ -42,6 +42,16 @@ public class favorites extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume()
+    {  // When adding a new movie to favs and going back by the back button, refresh activity
+        super.onResume();
+        loadFromSharedPrefs();
+
+        makeAdapter();
+    }
+
+    // Load user save list
     public void loadFromSharedPrefs() {
         SharedPreferences prefs = this.getSharedPreferences("settings", this.MODE_PRIVATE);
 
@@ -54,8 +64,9 @@ public class favorites extends AppCompatActivity {
 
     }
 
+    // make adapter for listview
     public void makeAdapter(){
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, android.R.id.text1, favorite_movies);
 
         assert fav_movies != null;
@@ -68,6 +79,7 @@ public class favorites extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    // Onclick Listener for when an item has been clicked in the list
     private class Listener implements AdapterView.OnItemClickListener{
 
         @Override

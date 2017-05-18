@@ -1,8 +1,5 @@
 package com.example.watchlist;
 
-import android.os.Bundle;
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,10 +12,9 @@ public class HttpRequestHelper2 {
     protected static synchronized String downloadFromServer(String... params) {
         String result = "";
 
-        // the movie name from user input
+        // the title of the movie the user is searching for
         String chosenTag = params[0];
 
-        Log.i("PARRAAAAAAAAMS", params[0]);
         URL site = null;
         String url;
         try {
@@ -50,7 +46,6 @@ public class HttpRequestHelper2 {
                     result += line;
                 }
             }
-            Log.d("HTTP22222", result);
         }
 
         catch (IOException e) {

@@ -4,19 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.watchlist.DataActivity">
-
-    <TextView
-        android:id="@+id/movie_results"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:ems="10"
-        android:text=""
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="177dp" />
+    tools:context="com.example.watchlist.favorites">
 
     <ListView
-        android:id="@+id/lvitems"
+        android:id="@+id/fav_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="10dp"

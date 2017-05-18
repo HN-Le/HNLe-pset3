@@ -25,22 +25,24 @@ public class View_Movie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view__movie);
 
-
+        // Initializing the elements in the layout
         TextView movie_data = (TextView) findViewById(R.id.movie_data);
         TextView movie_data_title = (TextView) findViewById(R.id.movie_data_title);
         TextView movie_data_year = (TextView) findViewById(R.id.movie_data_year);
         TextView movie_data_directors = (TextView) findViewById(R.id.movie_data_directors);
         TextView movie_data_actors = (TextView) findViewById(R.id.movie_data_actors);
         ImageView poster_movie = (ImageView) findViewById(R.id.poster_movie);
-        Button add_button = (Button) findViewById(R.id.add);
 
         ArrayList<DataObject> movieArray;
         Bundle extras = getIntent().getExtras();
 
+        // Get data from prev screen
         movieArray = (ArrayList<DataObject>) extras.getSerializable("data");
 
+        // If array has data
         if (movieArray != null) {
 
+            // Retrieve the movie data
             for (DataObject movieobject : movieArray) {
                 plot = movieobject.getPlot();
                 title = movieobject.getTitle();
@@ -52,11 +54,13 @@ public class View_Movie extends AppCompatActivity {
             }
         }
 
+        // Check if link is valid and start to get poster if so
         if (poster.length() > 8) {
             MovieAsyncTask3 asyncTask3 = new MovieAsyncTask3(poster_movie);
             asyncTask3.execute(poster);
         }
 
+        // Set all fields in layout
         movie_data.setText("PLOT:\n" + plot);
         movie_data_title.setText(title);
         movie_data_year.setText("Year: " + year);
@@ -66,6 +70,7 @@ public class View_Movie extends AppCompatActivity {
 
     }
 
+    // Save the movies the user saves
     public void saveToSharedPrefs(View view) {
 
         loadFromSharedPrefs();
@@ -74,22 +79,30 @@ public class View_Movie extends AppCompatActivity {
 
         context = getApplicationContext();
 
+        // Add movie to fav list (First time use)
         if (favorite_movie == null) {
             favorite_movie = title + ",";
             Toast.makeText(context, "Added!  ", Toast.LENGTH_SHORT).show();
-        } else if (favorite_movie.contains(title)) {
+        }
+
+        // Delete movie from fav list
+        else if (favorite_movie.contains(title)) {
             favorite_movie = favorite_movie.replace(title + ",", "");
             Toast.makeText(context, "Removed! ", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+
+        // Add movie to fav list
+        else {
             favorite_movie = favorite_movie + title + ",";
             Toast.makeText(context, "Added!  ", Toast.LENGTH_SHORT).show();
         }
 
         editor.putString("fav", favorite_movie);
         editor.commit();
+
     }
 
-
+    // Load user save list
     public void loadFromSharedPrefs() {
         SharedPreferences prefs = this.getSharedPreferences("settings", this.MODE_PRIVATE);
 

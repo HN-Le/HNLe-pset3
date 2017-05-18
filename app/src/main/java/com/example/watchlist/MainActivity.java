@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         MovieAsyncTask asyncTask = new MovieAsyncTask(this);
 
         // Using async task
-
         asyncTask.execute(movieSearch);
         movie.getText().clear();
 

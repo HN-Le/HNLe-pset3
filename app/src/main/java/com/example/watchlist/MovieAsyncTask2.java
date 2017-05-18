@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
     Context context;
     DataActivity mainAct2;
-    ArrayList<DataObject> movies;
 
     public MovieAsyncTask2(DataActivity view){
         this.mainAct2 = view;
@@ -50,6 +49,7 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
             JSONObject movie_data2 = new JSONObject(result);
             String plot, title, year, directors, actors, poster;
 
+            // get the needed strings from the JSON object
             plot = movie_data2.getString("Plot");
             title = movie_data2.getString("Title");
             year = movie_data2.getString("Year");
@@ -59,6 +59,7 @@ public class MovieAsyncTask2 extends AsyncTask<String, Integer, String> {
 
             DataObject moviedata = new DataObject();
 
+            // Set the variables in the object to the just gotten strings
             moviedata.setPlot(plot);
             moviedata.setTitle(title);
             moviedata.setYear(year);

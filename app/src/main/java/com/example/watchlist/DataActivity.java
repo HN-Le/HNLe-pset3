@@ -38,6 +38,7 @@ public class DataActivity extends AppCompatActivity {
         lvitems.setOnItemClickListener(new Listener());
     }
 
+    // Adapter for the listview
     public void makeMovieAdapter(){
         ArrayAdapter arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, android.R.id.text1, movieArray);
@@ -45,6 +46,28 @@ public class DataActivity extends AppCompatActivity {
         lvitems = (ListView) findViewById(R.id.lvitems);
         assert lvitems != null;
         lvitems.setAdapter(arrayAdapter);
+
+    }
+
+    // Onclick listener for when an item is clicked in the list
+    private class Listener implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+            movie_title = movieArray.get(position);
+
+            MovieAsyncTask2 asyncTask2 = new MovieAsyncTask2((DataActivity)context);
+
+            // make sure it doesn't crash because of weird characters with the encoder
+            try {
+                asyncTask2.execute((URLEncoder.encode(movie_title, "UTF-8")));
+            }
+            catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
@@ -59,25 +82,6 @@ public class DataActivity extends AppCompatActivity {
 
     }
 
-    private class Listener implements AdapterView.OnItemClickListener{
-
-        @Override
-        public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-
-            movie_title = movieArray.get(position);
-
-            MovieAsyncTask2 asyncTask2 = new MovieAsyncTask2((DataActivity)context);
-
-            try {
-                asyncTask2.execute((URLEncoder.encode(movie_title, "UTF-8")));
-            }
-            catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
 
 }
 

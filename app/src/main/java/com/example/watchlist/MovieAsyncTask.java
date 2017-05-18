@@ -11,14 +11,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
-
-/**
- * Created by Tiny on 19-4-2017.
- */
-
-
-
 public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
     Context context;
     MainActivity mainAct;
@@ -54,15 +46,26 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
 
             movie_data = movieStreamObject.optJSONArray("Search");
 
-            String title;
+            if (movie_data != null) {
 
-            for(int i = 0; i < movie_data.length(); i++){
+                String title;
 
-                JSONObject object = movie_data.getJSONObject(i);
-                title = object.getString("Title");
+                // loop through JSON object and get all the titles
+                for (int i = 0; i < movie_data.length(); i++) {
 
-                data.add(title);
+                    JSONObject object = movie_data.getJSONObject(i);
+                    title = object.getString("Title");
 
+                    data.add(title);
+
+                }
+
+                this.mainAct.movieStartIntent(data);
+            }
+
+            // if input is nonsense and no search results are available
+            else{
+                Toast.makeText(context, "Invalid title! Please try again!", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -71,6 +74,6 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
             }
 
-        this.mainAct.movieStartIntent(data);
+
     }
 }

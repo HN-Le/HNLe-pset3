@@ -2,10 +2,6 @@ package com.example.watchlist;
 
 import java.io.Serializable;
 
-/**
- * Created by Tiny on 15-5-2017.
- */
-
 public class DataObject implements Serializable{
         public String plot;
         public String title;

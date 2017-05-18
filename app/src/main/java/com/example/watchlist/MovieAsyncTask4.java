@@ -59,10 +59,10 @@ public class MovieAsyncTask4 extends AsyncTask<String, Integer, String> {
 
         catch (JSONException e) {
 
-            Log.d("plot", "ERRROR ");
             e.printStackTrace();
 
         }
+
         this.Asynctask4.movieStartIntent(movies);
     }
 }

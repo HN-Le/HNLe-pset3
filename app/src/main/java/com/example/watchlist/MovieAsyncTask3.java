@@ -24,6 +24,7 @@ public class MovieAsyncTask3 extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected Bitmap doInBackground(String... params) {
 
+        // download image from the link in the DataObject
         URL url = null;
 
         try {
