@@ -63,10 +63,7 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
 
                 data.add(title);
 
-                Log.i("title", title);
             }
-
-            Log.i("result", result);
 
         }
 

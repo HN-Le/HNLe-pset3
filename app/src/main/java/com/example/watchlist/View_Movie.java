@@ -1,25 +1,30 @@
 package com.example.watchlist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class View_Movie extends AppCompatActivity {
 
-    String plot, title, year, directors, actors, poster;
-    SharedPreferences pref;
-
+    String plot, title, year, directors, actors, poster, favorite_movie;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view__movie);
 
-        SharedPreferences pref = getPreferences(MODE_PRIVATE);
 
         TextView movie_data = (TextView) findViewById(R.id.movie_data);
         TextView movie_data_title = (TextView) findViewById(R.id.movie_data_title);
@@ -29,18 +34,14 @@ public class View_Movie extends AppCompatActivity {
         ImageView poster_movie = (ImageView) findViewById(R.id.poster_movie);
         Button add_button = (Button) findViewById(R.id.add);
 
-
-//        ImageView poster_movie = (ImageView) findViewById(R.id.poster_movie);
-
         ArrayList<DataObject> movieArray;
-
         Bundle extras = getIntent().getExtras();
 
         movieArray = (ArrayList<DataObject>) extras.getSerializable("data");
 
-        if (movieArray != null){
+        if (movieArray != null) {
 
-            for (DataObject movieobject: movieArray) {
+            for (DataObject movieobject : movieArray) {
                 plot = movieobject.getPlot();
                 title = movieobject.getTitle();
                 year = movieobject.getYear();
@@ -51,28 +52,61 @@ public class View_Movie extends AppCompatActivity {
             }
         }
 
-        if (poster.length() > 8){
+        if (poster.length() > 8) {
             MovieAsyncTask3 asyncTask3 = new MovieAsyncTask3(poster_movie);
             asyncTask3.execute(poster);
         }
 
         movie_data.setText("PLOT:\n" + plot);
         movie_data_title.setText(title);
-        movie_data_year.setText("Year: " + year );
-        movie_data_directors.setText("Directors: " + directors );
+        movie_data_year.setText("Year: " + year);
+        movie_data_directors.setText("Directors: " + directors);
         movie_data_actors.setText("Actors: " + actors);
-
-//        SharedPreferences.Editor prefsEditor = pref.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(movieobject);
-//        prefsEditor.putString("movieobject", json);
-//        prefsEditor.commit();
-
-
-
 
 
     }
 
+    public void saveToSharedPrefs(View view) {
+
+        loadFromSharedPrefs();
+        SharedPreferences prefs = this.getSharedPreferences("settings", this.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        context = getApplicationContext();
+
+        if (favorite_movie == null) {
+            favorite_movie = title + ",";
+            Toast.makeText(context, "Added!  ", Toast.LENGTH_SHORT).show();
+        } else if (favorite_movie.contains(title)) {
+            favorite_movie = favorite_movie.replace(title + ",", "");
+            Toast.makeText(context, "Removed! ", Toast.LENGTH_SHORT).show();
+        } else {
+            favorite_movie = favorite_movie + title + ",";
+            Toast.makeText(context, "Added!  ", Toast.LENGTH_SHORT).show();
+        }
+
+        editor.putString("fav", favorite_movie);
+        editor.commit();
+    }
+
+
+    public void loadFromSharedPrefs() {
+        SharedPreferences prefs = this.getSharedPreferences("settings", this.MODE_PRIVATE);
+
+        String favorites = prefs.getString("fav", null);
+
+        if (favorites != null) {
+            favorite_movie = favorites;
+        }
+
+    }
+
+
+    public void favs(View view) {
+        Intent intent = new Intent(this, favorites.class);
+
+        startActivity(intent);
+        finish();
+    }
 }
 

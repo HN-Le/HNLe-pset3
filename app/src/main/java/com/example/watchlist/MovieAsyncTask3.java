@@ -1,27 +1,14 @@
 package com.example.watchlist;
 
-import android.content.Context;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-
-import static com.example.watchlist.R.id.poster_movie;
-
-/**
- * Created by Tiny on 16-5-2017.
- */
 
 public class MovieAsyncTask3 extends AsyncTask<String, Void, Bitmap> {
 
